@@ -64,24 +64,36 @@ describe('Books API Endpoints', () => {
         expect(response.body).toHaveProperty("error", "Book not found");
     });
 
-
     it('should update an existing book', async () => {
         const res = await request(app)
             .put(`/books/${bookId}`)
-            .send({ name: 'Updated Test Book' });
+            .send({
+                name: 'Updated Test Book',
+                author: 'Updated Author',
+                publishedYear: 2023
+            });
+    
         expect(res.status).toBe(200);
         expect(res.body).toHaveProperty('name', 'Updated Test Book');
+        expect(res.body).toHaveProperty('author', 'Updated Author');
+        expect(res.body).toHaveProperty('publishedYear', 2023);
     });
-
+    
     it("PUT /books/:id should return 404 if book not found", async () => {
         const nonExistentId = "9999";
         const res = await request(app)
-          .put(`/books/${nonExistentId}`)
-          .send({ name: "Updated Title" });
+            .put(`/books/${nonExistentId}`)
+            .send({
+                name: "Updated Title",
+                author: "New Author",
+                publishedYear: 2025
+            });
     
         expect(res.status).toBe(404);
         expect(res.body).toHaveProperty("error", "Book not found");
     });
+    
+    
 
     it('should delete a book', async () => {
         const res = await request(app).delete(`/books/${bookId}`);
