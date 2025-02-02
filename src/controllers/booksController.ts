@@ -47,7 +47,12 @@ const updateBook = (req: Request, res: Response): void => {
         res.status(404).json({ error: 'Book not found' });
         return;
     }
-    Object.assign(book, req.body);
+    
+    const { name, author, publishedYear } = req.body;
+    book.name = name;
+    book.author = author;
+    book.publishedYear = publishedYear;
+    
     res.status(200).json(book);
 };
 
