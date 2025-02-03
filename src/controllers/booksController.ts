@@ -42,7 +42,7 @@ const addBook = (req: Request, res: Response): void => {
 };
 
 const updateBook = (req: Request, res: Response): void => {
-    const book = books.find(b => b.id === parseInt(req.params.id, 10));
+    const book : Book | undefined = books.find(b => b.id === parseInt(req.params.id, 10));
     if (!book) {
         res.status(404).json({ error: 'Book not found' });
         return;
@@ -66,4 +66,4 @@ const deleteBook = (req: Request, res: Response): void => {
     res.status(201).json({ message: "Book deleted successfully" });
 };
 
-export default { getAllBooks, getBookById, addBook, updateBook, deleteBook };
+export  { getAllBooks, getBookById, addBook, updateBook, deleteBook };

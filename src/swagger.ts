@@ -1,9 +1,10 @@
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Express } from 'express';
+import path from 'path';
 
 const swaggerOptions = {
-    swaggerDefinition: {
+    definition: {
         openapi: '3.0.0',
         info: {
             title: 'Books API',
@@ -12,7 +13,7 @@ const swaggerOptions = {
         },
         servers: [{ url: 'http://localhost:3000' }]
     },
-    apis: ['./src/routes/*.ts']
+    apis: [path.join(__dirname, './openapi.yml')],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
